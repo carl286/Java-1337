@@ -1,0 +1,10 @@
+*.java~
+/.idea/
+*.swp
+*.DS_Store
+./__pycache__/*
+/.ropeproject/*
+.classpath
+.project
+.settings/
+bin/
