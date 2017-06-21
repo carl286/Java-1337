@@ -1,6 +1,5 @@
 package com.topcoder.arena.srm207;
 
-import net.jcip.examples.SynchronizedFactorizer;
 
 import java.util.HashMap;
 import java.util.LinkedList;
