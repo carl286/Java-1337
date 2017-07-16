@@ -38,6 +38,7 @@ public class Solution {
 //    https://leetcode.com/submissions/detail/32607703/
 //    https://leetcode.com/submissions/detail/26407388/
 //    http://www.jiuzhang.com/solutions/best-time-to-buy-and-sell-stock-iv/
+//    https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/discuss/39608/a-clean-dp-solution-which-generalizes-to-k-transactions
 public int maxProfitIV(int k, int[] prices) {
     if (prices == null || prices.length <= 1 || k < 1)
         return 0;
@@ -90,7 +91,7 @@ public int maxProfitIV(int k, int[] prices) {
         return Math.max(s, Math.max(b,c));
     }
 
-
+//    https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/most-consistent-ways-of-dealing-with-the-series-of-stock-problems
     public static void main(String [] args) {
         Solution s = new Solution();
 //        int[] prices = {1, 2, 3, 0, 2};

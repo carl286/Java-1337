@@ -2,6 +2,9 @@ package com.l1337.l204;
 
 
 public class Solution {
+
+
+//    https://leetcode.com/problems/count-primes/discuss/57636/My-JAVA-Solution
     public int countPrimes(int n) {
         /*
         if (n <= 2)

@@ -1,6 +1,8 @@
 package com.l1337.l336;
 
 
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,6 +30,8 @@ public class Solution {
     }
 
 //    https://leetcode.com/submissions/detail/56859802/
+//    https://leetcode.com/problems/palindrome-pairs/discuss/79195/O(n-*-k2)-java-solution-with-Trie-structure
+//    https://leetcode.com/problems/palindrome-pairs/discuss/79210/The-Easy-to-unserstand-JAVA-Solution
     public List<List<Integer>> palindromePairs(String[] words) {
         //Below Code TLE, this is a tricky question...
         //assume no empty string????, non-null....
@@ -87,6 +91,84 @@ public class Solution {
         }
         return ret;
     }
+
+
+    public List<List<Integer>> palindromePairs_March4_21_TLE(String[] words) {
+        //correctness is right below, but got TLE...
+        List<List<Integer>> ret = new ArrayList<>();
+        for (int i = 0; i < words.length; ++i)
+            for (int j = i + 1; j < words.length; ++j)
+            {
+                //check i, j and j,i
+                String tmp =words[i] + words[j];
+                if (isPalindrome(tmp))
+                    ret.add(Arrays.asList(i,j));
+                tmp = words[j] + words[i];
+                if (isPalindrome(tmp))
+                    ret.add(Arrays.asList(j,i));
+            }
+        return ret;
+    }
+
+    public List<List<Integer>> palindromePairs_March4_21(String[] words) {
+        Pair<String, Integer>[] original = new Pair [words.length];
+        Pair<String, Integer>[] backwards = new Pair [words.length];
+        for (int i = 0; i < words.length; ++i)
+        {
+            original[i] = new Pair<>(words[i], i);
+            backwards[i] = new Pair<>(new String(new StringBuilder(words[i]).reverse()), i);
+        }
+        Arrays.sort(original, (a,b) -> (a.getKey().compareTo(b.getKey())));
+        Arrays.sort(backwards, (a,b) -> (a.getKey().compareTo(b.getKey())));
+
+
+        //correctness is right below, but got TLE...
+        List<List<Integer>> ret = new ArrayList<>();
+        for (int i = 0; i < words.length; ++i)
+            for (int j = i + 1; j < words.length; ++j)
+            {
+                //check i, j and j,i
+                String tmp =words[i] + words[j];
+                if (isPalindrome(tmp))
+                    ret.add(Arrays.asList(i,j));
+                tmp = words[j] + words[i];
+                if (isPalindrome(tmp))
+                    ret.add(Arrays.asList(j,i));
+            }
+        return ret;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void main(String [] args) {
 //        String [] words = {"abcd","dcba","lls","s","sssll"};
 //        String [] words = {"abcd","dcba"};

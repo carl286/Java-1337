@@ -38,6 +38,7 @@ public class Solution {
 //	Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei),
 // find the minimum number of conference rooms required.
 //	For example, Given [[0, 30],[5, 10],[15, 20]], return 2.
+//    http://www.cnblogs.com/grandyang/p/5244720.html, at least so3 is wrong.
     public int minMeetingRooms(Interval[] intervals) {
         if (intervals == null || intervals.length <= 0)
             return 0;
@@ -67,11 +68,11 @@ public class Solution {
 //        Interval t3 = new Interval(15,20);
 
         Interval t1 = new Interval(1,7);
-        Interval t2 = new Interval(2,3);
+        Interval t2 = new Interval(1,7);
         Interval t3 = new Interval(4,5);
 
         Interval[] intervals = {t1,t2,t3};
-        System.out.println(s.canAttendMeetingsI(intervals));
+//        System.out.println(s.canAttendMeetingsI(intervals));
         System.out.println(s.minMeetingRooms(intervals));
 
     }

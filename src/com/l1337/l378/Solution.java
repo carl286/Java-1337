@@ -2,6 +2,7 @@ package com.l1337.l378;
 
 //https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -44,9 +45,81 @@ public class Solution {
         return ret;
     }
 
+    public int countSmallest(int [][] matrix, int val)
+    {
+        int cnt = 0;
+
+        return cnt;
+    }
+
+
+    public int kthSmallest2Helper(int[][] matrix, int val) {
+        int total = 0;
+        for (int i = 0; i < matrix.length; ++i)
+        {
+            int k = Arrays.binarySearch(matrix[i], val);
+            if (k >= 0)
+            {
+                //issues with duplicates..
+
+                //total += k;
+                total += k;
+                while (k < matrix[i].length && matrix[i][k] == val)
+                {
+                    total++;
+                    ++k;
+                }
+            }
+            else
+            {
+                total += -(k + 1);
+            }
+        }
+        return total;
+    }
+
+    public int kthSmallest2(int[][] matrix, int k) {
+        //it's guaranteed that 1 <= k <= n^2
+        int startR = matrix.length - 1, startC = 0;
+        int closestK = Integer.MAX_VALUE;
+        int ret = matrix[startR][startC];
+
+        while (startR >= 0 && startC < matrix.length)
+        {
+            int count = kthSmallest2Helper(matrix, matrix[startR][startC]);
+//            if (count == k)
+//            {
+//                return matrix[startR][startC];
+//            }
+            if (count == k)
+                return matrix[startR][startC];
+            if (count < k)
+            {
+                ++startC;
+            }
+            else
+            {   // count > k
+                if (closestK > count)
+                {
+                    ret = matrix[startR][startC];
+                    closestK = count;
+                }
+                --startR;
+
+            }
+        }
+        return ret;
+    }
+
 //    https://www.hrwhisper.me/leetcode-kth-smallest-element-sorted-matrix/
     public static void main(String [] args) {
         Solution s = new Solution();
-        System.out.println("Hello World");
+        //int [][] matrix = new int[][]{{1,5,9}, {10,11,13}, {12,13,15}};
+        int [][] matrix = new int[][]{{1,3,5}, {6,7,12}, {11,14,14}};
+        int k = 8;
+//
+//        int [][] matrix = new int[][]{{1,1,1}, {1,1,1}, {11,14,14}};
+//        for (int c = 1; c <= 9; ++c)
+        System.out.println(s.kthSmallest2(matrix, k));
     }
 }

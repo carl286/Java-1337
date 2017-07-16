@@ -16,8 +16,9 @@ public class PriorityQueueTest {
         }
     }
 
+
     public static void main(String[] args) {
-        int[] ia = { 1, 10, 5, 3, 4, 7, 6, 9, 8 };
+       int[] ia = { 1, 10, 5, 3, 4, 7, 6, 9, 8 };
 //        int[] ia = { 1, 1, 1, 1 };
         PriorityQueue<Integer> pq1 = new PriorityQueue<Integer>();
 

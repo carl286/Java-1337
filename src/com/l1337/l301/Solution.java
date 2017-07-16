@@ -1,9 +1,8 @@
 package com.l1337.l301;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 //Summary
@@ -259,11 +258,155 @@ public class Solution {
 //				ans.add(reversed);
 //		}
 
-    public static void main(String [] args) {
-        Solution s = new Solution();
-        for (String ss : s.removeInvalidParentheses("(a)())()")) {
-            System.out.println(ss);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void helper(String s, int index, StringBuilder sb, Set<String> tmp, int [] lefts, int [] rights, int acc, int pairSoFar, int expectedPair)
+    {
+        if (index >= s.length())
+        {
+            if (acc == 0 && pairSoFar == expectedPair)
+            {
+                tmp.add(new String(sb));
+            }
+
+            return;
         }
 
+        //no way to match reaming pairs
+        if (acc > rights[index])
+        {
+            return;
+        }
+
+        if (s.charAt(index) == '(')
+        {
+            //take it
+            if (pairSoFar < expectedPair)
+            {
+                sb.append(s.charAt(index));
+                helper(s, index+1, sb, tmp, lefts, rights, acc+1, pairSoFar, expectedPair);
+                sb.deleteCharAt(sb.length()-1);
+            }
+
+            //skip it.
+            helper(s, index+1, sb, tmp, lefts, rights, acc, pairSoFar, expectedPair);
+        }
+        else if (s.charAt(index) == ')')
+        {
+            if (acc > 0)
+            {
+                sb.append(s.charAt(index));
+                helper(s, index+1, sb, tmp, lefts, rights, acc-1, pairSoFar+1, expectedPair);
+                sb.deleteCharAt(sb.length()-1);
+            }
+            helper(s, index+1, sb, tmp, lefts, rights, acc, pairSoFar, expectedPair);
+        }
+        else
+        {
+            sb.append(s.charAt(index));
+            helper(s, index+1, sb, tmp, lefts, rights, acc, pairSoFar, expectedPair);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+
+    private int getMinimumPairCounts(String s)
+    {
+        int acc = 0;
+        int left = 0;
+        for(int i = 0; i < s.length(); ++i)
+        {
+            if (s.charAt(i) == '(')
+            {
+                ++left;
+            }
+            else if (s.charAt(i) == ')')
+            {
+                if (left > 0)
+                {
+                    --left;
+                    ++acc;
+                }
+            }
+        }
+
+        return acc;
+    }
+    public List<String> removeInvalidParenthesesMay6_21(String s) {
+        int n = s.length();
+        int [] rights = new int [n];
+        int [] lefts = new int [n];
+        char [] data = s.toCharArray();
+        int acc = 0;
+        for(int i = n - 1; i >= 0; --i)
+        {
+            if (data[i] == ')')
+                ++acc;
+            rights[i] = acc;
+        }
+        acc = 0;
+        for(int i = 0; i < n; ++i)
+        {
+            if (data[i] == '(')
+                ++acc;
+            lefts[i] = acc;
+        }
+
+        //get to know the minimum number of invalid parentheses to make the input string valid.
+        int expectedPair = getMinimumPairCounts(s);
+
+        Set<String> tmp = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+
+        helper(s, 0, sb, tmp, lefts, rights, 0, 0, expectedPair);
+        return tmp.stream().collect(Collectors.toList());
+    }
+
+    public static void main(String [] args) {
+        Solution s = new Solution();
+//        for (String ss : s.removeInvalidParentheses("(a)())()")) {
+//            System.out.println(ss);
+//        }
+//        for (String ss : s.removeInvalidParenthesesMay6_21("()())")) {
+        for (String ss : s.removeInvalidParenthesesMay6_21("()())")) {
+            System.out.println(ss);
+        }
     }
 }

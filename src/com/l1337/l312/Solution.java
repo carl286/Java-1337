@@ -1,8 +1,8 @@
 package com.l1337.l312;
 
-import org.omg.PortableInterceptor.INACTIVE;
 
 //	https://leetcode.com/problems/burst-balloons/
+//https://leetcode.com/problems/burst-balloons/discuss/76228/share-some-analysis-and-explanations
 public class Solution {
 
     public int maxCoins(int[] inums) {
@@ -35,6 +35,8 @@ public class Solution {
 //时间复杂度O(n ^ 3)参考peisi的答案：https://leetcode.com/discuss/72216/share-some-analysis-and-explanations
 //	以最后被爆破的气球m为界限，把数组分为左右两个子区域 状态转移方程：
 //	dp[l][r] = max(dp[l][r], nums[l] * nums[m] * nums[r] + dp[l][m] + dp[m][r])
+
+//    https://leetcode.com/problems/burst-balloons/discuss/76228/share-some-analysis-and-explanations
 
     public static void main(String [] args) {
         Solution s = new Solution();
